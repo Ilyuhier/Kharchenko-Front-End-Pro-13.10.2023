@@ -1,0 +1,12 @@
+td{
+  font-size: 500%;
+  text-align: center;
+  border-color: black;
+  border-style:groove;
+}
+
+table{
+  border-color: black;
+  border-style: groove;
+  border-spacing: 0px;
+}
