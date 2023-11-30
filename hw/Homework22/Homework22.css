@@ -1,0 +1,65 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  background-color: lightpink;
+}
+
+h1{
+  text-align: center;
+  font-size: 100px;
+}
+
+main{
+  display: flex;
+}
+
+div{
+  width: 33.33%;
+  
+}
+
+h2{
+  font-size: 50px;
+  text-align: center;
+  margin: 40px;
+}
+
+li{
+  font-size: 30px;
+  margin: 10%;
+}
+
+li:hover{
+  color: white;
+}
+.category{
+  background-color: burlywood;
+}
+
+.goods{
+  background-color: bisque;
+}
+
+.info{
+  background-color: lightgoldenrodyellow;
+  
+}
+
+img{
+  width: 90%;
+  margin: 5% 5%;
+}
+
+h3{
+  font-size: 35px;
+  text-align: center;
+}
+
+button{
+  font-size: 200%;
+  width: 80%;
+  margin: auto 10%;
+}
