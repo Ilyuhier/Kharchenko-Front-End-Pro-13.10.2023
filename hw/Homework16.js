@@ -62,7 +62,7 @@ const person3 = new Person('Maksim',22)
 
 // декілька екземплярів класу Автомобіль;
 
-const car1 = new Car("Toyota","Celica","2004","СА8552ІК")
+const car1 = new Car("Toyota","Celica","2004","СА8552КА")
 const car2 = new Car("Peugeot","307","2004","СВ4206ЕЕ")
 const car3 = new Car("Volkswagen","Passat", "2002", "СА0380ІМ")
 
