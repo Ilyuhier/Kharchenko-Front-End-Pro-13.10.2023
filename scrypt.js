@@ -1,41 +1,67 @@
-// Створити масив, довжину та елементи якого задає користувач.
+// За допомогою ajax-запиту вивести погоду
 
-// Відсортувати масив за зростанням.
+// http://api.openweathermap.org/data/2.5/weather?q=LVIV&units=metric&APPID=5d066958a60d315387d9492393935c19
 
-// Видалити елементи з масиву з 2 по 4 (включно!).
+// q=XXX - місто, для якого показати погоду
+// temp – температура
+// pressure - тиск
+// description – опис
+// humidity – вологість 
+// speed – швидкість вітру
+// deg - напрям у градусах
+// icon - значок, де 10d код іконки
+// http://openweathermap.org/img/w/10d.png  
 
-// У міру змін виводити вміст масиву на сторінку.
 
-const numbers = [];
 
-for (let i=0; i>=0; i++){
-  let element = prompt('Бажаєте додати елемент до масиву?','Елемент масиву');
-  if (element === null){
-    alert('Ви закінчили наповнювати масив')
-    break;
-  } else if (isNaN(element)){
-    alert('Треба вводити числа');
-  } else {
-    numbers.push(Number(element));
-    console.log(numbers);
+const button = document.querySelector('button')
+button.addEventListener('click',fetchData)
+
+async function fetchData() {
+  try {
+    const response = await fetch('http://api.openweathermap.org/data/2.5/weather?q=LVIV&units=metric&APPID=5d066958a60d315387d9492393935c19');
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const data = await response.json();
+    console.log(data);
+    buildTable(data)
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
   }
 }
-const newNumbers =[];
-const numberLength = numbers.length;
-for (let i = 0; i < numberLength; i++){
 
-  let biggestNumber = numbers[0];
-  numbers.forEach((number) => {
-    if(biggestNumber < number){
-      biggestNumber = number;
-    }
-  })
-
-  newNumbers.unshift(biggestNumber )
-  console.log(`newNumbers = ${newNumbers}`);
-  let numberIndex = numbers.indexOf(biggestNumber);
-  numbers.splice(numberIndex,1);
-  console.log(`numbers = ${numbers}`);
+function buildTable(data){
+  const parametrsArray = ['q', 'temp', 'pressure', 'description', 'humidity','speed', 'deg']
+  const dataParametrsNames = [ data.name, data.main.temp, data.main.pressure, data.weather[0].description, data.main.humidity, data.wind.speed, data.wind.deg]
+  const table = document.createElement('table')
+  const body =  document.querySelector('body')
+  showIcon(body)
+  body.appendChild(table)
+  for(let i = 0; i<parametrsArray.length; i++){
+    buildLine(parametrsArray[i], dataParametrsNames[i], table)
+  }
 }
-newNumbers.splice(1, 3);
-console.log(`newNumbers = ${newNumbers}`);
+
+function buildLine(parametr, parametrValue, table){
+  const line = document.createElement('tr')
+  table.appendChild(line)
+  const parametrName = document.createElement('td')
+  parametrName.style.textAlign = 'right'
+  line.appendChild(parametrName)
+  parametrName.textContent = `${parametr}:`
+  const value = document.createElement('td')
+  line.appendChild(value)
+  value.textContent = parametrValue
+}
+
+function showIcon(body){
+  const p = document.createElement('p')
+  body.appendChild(p)
+  const iconLink = 'http://openweathermap.org/img/w/10d.png'
+  const icon = document.createElement('img')
+  p.appendChild(icon)
+  icon.src = iconLink
+}
