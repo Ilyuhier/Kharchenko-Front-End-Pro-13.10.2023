@@ -64,4 +64,4 @@ function showIcon(body){
   const icon = document.createElement('img')
   p.appendChild(icon)
   icon.src = iconLink
-} 
+}
